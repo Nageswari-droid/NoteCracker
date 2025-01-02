@@ -1,0 +1,53 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@supabase/functions-js@*": "2.4.4"
+  },
+  "jsr": {
+    "@supabase/functions-js@2.4.4": {
+      "integrity": "38456509a6e22fb116b118464cbb36357256f9048d3580632b63af91f63769f7"
+    }
+  },
+  "remote": {
+    "https://deno.land/x/axiod@0.26.2/helpers.ts": "467f2ca75608f368c8092e800eab0d6d79b3fa42346372be62a5b93acf50fe7e",
+    "https://deno.land/x/axiod@0.26.2/interfaces.ts": "1b5a7b70b1e7faecd2f251ad080bd87188fba585e2de667af472c4d72abf636e",
+    "https://deno.land/x/axiod@0.26.2/mod.ts": "1175ec90a040d764b9940753f8d8e3f37a2328a0536eed48e411a8f1a3e9e5cb",
+    "https://deno.land/x/axiod@0.26.2/mods/url-join.ts": "c925b2dd0bd490093d084bd4c74a9502260e014d5e760a4951b3e7c8ab3ca43f",
+    "https://deno.land/x/url_join@1.0.0/mod.ts": "d3c7007e3ab15594e54d5b90dce623b3e274a726e0cdf57858e7ecab77a0166c"
+  },
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:@emotion/react@^11.14.0",
+        "npm:@emotion/styled@^11.14.0",
+        "npm:@eslint/js@^9.17.0",
+        "npm:@fontsource/roboto@^5.1.0",
+        "npm:@mui/icons-material@^6.3.0",
+        "npm:@mui/material@^6.3.0",
+        "npm:@shadcn/ui@^0.0.4",
+        "npm:@supabase/functions-js@^2.4.4",
+        "npm:@supabase/supabase-js@^2.47.10",
+        "npm:@tanstack/react-query@^5.62.11",
+        "npm:@types/react-dom@^18.3.5",
+        "npm:@types/react@^18.3.18",
+        "npm:@vitejs/plugin-react@^4.3.4",
+        "npm:autoprefixer@^10.4.20",
+        "npm:axios@^1.7.9",
+        "npm:buffer@^6.0.3",
+        "npm:eslint-plugin-react-hooks@5",
+        "npm:eslint-plugin-react-refresh@~0.4.16",
+        "npm:eslint-plugin-react@^7.37.2",
+        "npm:eslint@^9.17.0",
+        "npm:globals@^15.14.0",
+        "npm:postcss@^8.4.49",
+        "npm:prop-types@^15.8.1",
+        "npm:react-dom@^18.3.1",
+        "npm:react-router-dom@^7.1.1",
+        "npm:react@^18.3.1",
+        "npm:supabase@^1.10.2",
+        "npm:tailwindcss@^3.4.17",
+        "npm:vite@^6.0.5"
+      ]
+    }
+  }
+}
