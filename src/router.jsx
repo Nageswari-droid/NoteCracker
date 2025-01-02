@@ -1,18 +1,7 @@
-import { useContext } from "react";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { Context } from "./context/contextProvider";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
-
-const Guard = (props) => {
-  const { isLoggedIn } = useContext(Context);
-
-  if (!isLoggedIn) {
-    return <Navigate to={"/login"} />;
-  }
-
-  return props.children;
-};
+import AuthRouter from "./AuthRouter";
 
 export default function Router() {
   return (
@@ -21,11 +10,10 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         <Route
           path="/"
-          index
           element={
-            <Guard>
+            <AuthRouter>
               <Home />
-            </Guard>
+            </AuthRouter>
           }
         />
       </Routes>

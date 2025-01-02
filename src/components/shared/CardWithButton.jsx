@@ -6,6 +6,7 @@ export default function CardWithButton({
   buttonIcon,
   buttonActiveIcon,
   buttonText,
+  buttonOnClick
 }) {
   return (
     <div className="w-full border-0 m-auto h-3/4 max-[500px]:h-3/4 lg:h-3/4 sm:h-2/3 flex justify-center rounded-md bg-slate-100 gap-10 p-6">
@@ -19,6 +20,7 @@ export default function CardWithButton({
             icon={buttonIcon}
             activeIcon={buttonActiveIcon}
             label={buttonText}
+            onClickHandler={buttonOnClick}
           />
         </div>
       </div>

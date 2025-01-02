@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function ButtonWithImage({ icon, activeIcon, label }) {
+export default function ButtonWithImage({ icon, activeIcon, label, onClickHandler }) {
   const [buttonIcon, setButtonIconn] = useState(icon);
   return (
     <div
@@ -11,6 +11,7 @@ function ButtonWithImage({ icon, activeIcon, label }) {
       onMouseLeave={() => {
         setButtonIconn(icon);
       }}
+      onClick={onClickHandler}
     >
       <img src={buttonIcon} className="object-fit w-8 h-8" />
       <div>{label}</div>
@@ -18,4 +19,3 @@ function ButtonWithImage({ icon, activeIcon, label }) {
   );
 }
 
-export default ButtonWithImage;
