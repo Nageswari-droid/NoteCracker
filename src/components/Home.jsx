@@ -1,28 +1,11 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useLogoutWithNotion from "../supabase/useLogoutWithNotion";
-import Loader from "../Loader";
+import LogoutBar from "./LogoutBar";
 import Pages from "./Pages";
 
 export default function Home() {
-  const navigate = useNavigate();
-  const logout = useLogoutWithNotion();
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-  if (isLoggingOut) return <Loader />;
-
-  const logoutWithNotion = async () => {
-    setIsLoggingOut(true);
-    await logout.mutateAsync();
-    navigate("/login");
-  };
-
   return (
-    <div>
+    <div className="bg-[#1a1a19] w-full h-full">
+      <LogoutBar />
       <Pages />
-      <h1 className="cursor-pointer" onClick={logoutWithNotion}>
-        Sign out
-      </h1>
     </div>
   );
 }
