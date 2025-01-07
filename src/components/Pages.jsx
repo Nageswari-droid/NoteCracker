@@ -21,7 +21,6 @@ import { difficultyLevel } from "../constants/difficultyLevel";
 export default function Pages() {
   const session = useSession();
   const { data: sessionData } = session;
-
   const { pages, workspace, allPages } = useContext(Context);
   const [selectedWorkspace, setSelectedWorkspace] = useState("");
   const [selectedPage, setSelectedPage] = useState("");
@@ -30,14 +29,26 @@ export default function Pages() {
     useState(10);
   const [selectedQuestionDifficulty, setSelectedQuestionDifficulty] =
     useState("");
+  const [clicked, setClicked] = useState(false);
+
+  const { data, isLoading, refetch } = usePageContent(
+    sessionData?.accessToken,
+    sessionData?.providerToken,
+    selectedPage,
+    clicked
+  );
 
   const updateSelectedWorkspace = (selectedWorkspace) => {
     setSelectedWorkspace(selectedWorkspace);
     setSelectedPage("");
     setSelectedQuestionDifficulty("");
     setSelectedNumberOfQuestions(10);
+
     if (pages[selectedWorkspace].length > 1) setContainsPages(true);
-    else setContainsPages(false);
+    else {
+      setContainsPages(false);
+      setSelectedPage(selectedWorkspace);
+    }
   };
 
   const updateSelectedPage = (selectedPage) => {
@@ -63,6 +74,11 @@ export default function Pages() {
     });
 
     return destructuredPages;
+  };
+
+  const handleClick = () => {
+    setClicked(true);
+    refetch();
   };
 
   return (
@@ -101,7 +117,7 @@ export default function Pages() {
             icon={revision}
             activeIcon={revisionActive}
             label={submit}
-            onClickHandler={() => {}}
+            onClickHandler={handleClick}
           />
         </div>
       </div>
