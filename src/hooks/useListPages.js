@@ -4,6 +4,11 @@ export default function useListPages(accessToken, providerToken) {
   const listPages = useQuery({
     queryKey: ["listPages"],
     queryFn: async () => {
+      const cacheKey = "notion_pages_cache";
+      const cacheData = sessionStorage.getItem(cacheKey);
+
+      if (cacheData) return JSON.parse(cacheData);
+
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_BASE_URL}/notion_pages`,
         {
@@ -23,7 +28,9 @@ export default function useListPages(accessToken, providerToken) {
         throw new Error(response.statusText);
       }
 
-      return response.json();
+      const data = await response.json();
+      sessionStorage.setItem(cacheKey, JSON.stringify(data));
+      return data;
     },
   });
 

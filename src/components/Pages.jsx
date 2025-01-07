@@ -1,8 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
+import { Context } from "../context/contextProvider";
 import useSession from "../hooks/useSession";
 import useListPages from "../hooks/useListPages";
 import Loader from "../Loader";
-import { Context } from "../context/contextProvider";
 import defaultDict from "../utils/defaultDict";
 import Inputs from "./Inputs";
 import ButtonWithImage from "./shared/ButtonWithIcon";

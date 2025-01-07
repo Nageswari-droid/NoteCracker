@@ -7,6 +7,8 @@ export default function useLogoutWithNotion() {
     mutationFn: async () => {
       const { error } = await supabase.auth.signOut();
 
+      sessionStorage.clear();
+
       return error;
     },
   });
