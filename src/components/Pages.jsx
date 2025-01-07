@@ -28,7 +28,7 @@ export default function Pages() {
   const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] =
     useState(10);
   const [selectedQuestionDifficulty, setSelectedQuestionDifficulty] =
-    useState("Easy");
+    useState("");
   const difficultyLevel = {
     1: "Easy",
     2: "Medium",
@@ -58,13 +58,18 @@ export default function Pages() {
   };
 
   const updateSelectedWorkspace = (selectedWorkspace) => {
-    if (pages[selectedWorkspace].length > 0) setContainsPages(true);
-    else setContainsPages(false);
     setSelectedWorkspace(selectedWorkspace);
+    setSelectedPage("");
+    setSelectedQuestionDifficulty("");
+    setSelectedNumberOfQuestions(10);
+    if (pages[selectedWorkspace].length > 1) setContainsPages(true);
+    else setContainsPages(false);
   };
 
   const updateSelectedPage = (selectedPage) => {
     setSelectedPage(selectedPage);
+    setSelectedQuestionDifficulty("");
+    setSelectedNumberOfQuestions(10);
   };
 
   const updateNumberOfQuestions = (numberOfQuestions) => {
@@ -73,6 +78,7 @@ export default function Pages() {
 
   const updateQuestionDifficulty = (selectedLevel) => {
     setSelectedQuestionDifficulty(difficultyLevel[selectedLevel]);
+    setSelectedNumberOfQuestions(10);
   };
 
   const destructurePagesObj = () => {
@@ -92,17 +98,21 @@ export default function Pages() {
       let allPages = {};
 
       results.forEach((result) => {
+        let page = {};
+        let id = result.id;
+        let title = result.properties.title.title[0].plain_text;
+
         if (result.parent.workspace || result.parent.block_id) {
-          workspace[result.id] = result.properties.title.title[0].plain_text;
+          workspace[id] = title;
+          page[id] = "Homepage";
+          pages[id].push(page);
         } else {
           let parent_id = result.parent.page_id;
-          let page = {};
-          page[result.id] = result.properties.title.title[0].plain_text;
-
+          page[id] = title;
           pages[parent_id].push(page);
         }
 
-        allPages[result.id] = result.properties.title.title[0].plain_text;
+        allPages[id] = title;
       });
 
       setAllPages(allPages);
@@ -140,7 +150,7 @@ export default function Pages() {
             subHead={"Difficulty Level"}
             options={difficultyLevel}
             updateHandler={updateQuestionDifficulty}
-            defaultOption={"Select a difficult level"}
+            defaultOption={"Select a level"}
             value={selectedQuestionDifficulty}
           />
           <Inputs
