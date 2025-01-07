@@ -26,9 +26,14 @@ export default function Pages() {
   const [selectedPage, setSelectedPage] = useState("");
   const [containsPages, setContainsPages] = useState(false);
   const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] =
-    useState("10");
+    useState(10);
   const [selectedQuestionDifficulty, setSelectedQuestionDifficulty] =
     useState("Easy");
+  const difficultyLevel = {
+    1: "Easy",
+    2: "Medium",
+    3: "Hard",
+  };
 
   const mergeChildrenPages = (pages, workspace) => {
     const workspaceKeys = new Set(Object.keys(workspace));
@@ -66,8 +71,8 @@ export default function Pages() {
     setSelectedNumberOfQuestions(numberOfQuestions);
   };
 
-  const updateQuestionDifficulty = (difficultyLevel) => {
-    setSelectedQuestionDifficulty(difficultyLevel);
+  const updateQuestionDifficulty = (selectedLevel) => {
+    setSelectedQuestionDifficulty(difficultyLevel[selectedLevel]);
   };
 
   const destructurePagesObj = () => {
@@ -132,14 +137,16 @@ export default function Pages() {
             />
           )}
           <Inputs
-            subHead={"Number of questions"}
-            updateHandler={updateNumberOfQuestions}
-            value={selectedNumberOfQuestions}
+            subHead={"Difficulty Level"}
+            options={difficultyLevel}
+            updateHandler={updateQuestionDifficulty}
+            defaultOption={"Select a difficult level"}
+            value={selectedQuestionDifficulty}
           />
           <Inputs
-            subHead={"Difficulty Level"}
-            updateHandler={updateQuestionDifficulty}
-            value={selectedQuestionDifficulty}
+            subHead={"Number of questions"}
+            updateHandler={updateNumberOfQuestions}
+            count={selectedNumberOfQuestions}
           />
           <div className="w-1/5 m-auto font-semibold">
             <ButtonWithImage

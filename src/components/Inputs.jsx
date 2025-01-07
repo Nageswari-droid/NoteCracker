@@ -1,4 +1,5 @@
 import Option from "./shared/Options";
+import Counter from "./shared/Counter";
 
 export default function Inputs({
   subHead,
@@ -6,6 +7,7 @@ export default function Inputs({
   updateHandler,
   defaultOption,
   value,
+  count
 }) {
   return (
     <div className="flex flex-row justify-center w-full mb-4">
@@ -18,7 +20,13 @@ export default function Inputs({
           value={value}
         />
       ) : (
-        <div className="w-1/4">{value}</div>
+        <div className="w-1/4">
+          <Counter
+            style="w-3/5"
+            updateCounter={updateHandler}
+            count={count}
+          />
+        </div>
       )}
     </div>
   );
