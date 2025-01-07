@@ -17,7 +17,7 @@ export default function LogoutBar() {
   };
 
   return (
-    <div className="w-full bg-[#171717] flex justify-end">
+    <div className="w-full fixed bg-[#171717] flex justify-end">
       <button
         onClick={logoutWithNotion}
         className="border-2 bg-white border-white text-slate-900 font-semibold py-2 px-4 rounded-md my-4 mr-6 hover:bg-slate-900 hover:text-white cursor-pointer"
