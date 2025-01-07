@@ -6,6 +6,7 @@ import useLoginWithNotion from "../supabase/useLoginWithNotion";
 import useSession from "../hooks/useSession";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { cardBody, notionLogin } from "../constants/text";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -28,8 +29,8 @@ export default function Login() {
       <div className="m-auto">
         <CardWithButton
           img={notes}
-          body="Enhance learning with active recall!"
-          buttonText="Login with Notion"
+          body={cardBody}
+          buttonText={notionLogin}
           buttonIcon={notion}
           buttonActiveIcon={notionFilled}
           buttonOnClick={loginWithNotion}
