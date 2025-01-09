@@ -1,6 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
-export default function usePageContent(accessToken, providerToken, pageId, enable) {
+export default function usePageContent(
+  accessToken,
+  providerToken,
+  pageId,
+  enable
+) {
   const listPages = useQuery({
     queryKey: ["pageContent"],
     queryFn: async () => {

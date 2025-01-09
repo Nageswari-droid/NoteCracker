@@ -7,6 +7,8 @@ import defaultDict from "../utils/defaultDict";
 import { useContext, useEffect } from "react";
 import { Context } from "../context/contextProvider";
 import { homepage } from "../constants/text";
+import useLogoutWithNotion from "../supabase/useLogoutWithNotion";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const session = useSession();
@@ -16,8 +18,17 @@ export default function Home() {
     sessionData?.accessToken,
     sessionData?.providerToken
   );
+  const logout = useLogoutWithNotion();
+  const navigate = useNavigate();
   const { data, error, isLoading } = listPages;
   const results = data?.results;
+
+  useEffect(() => {
+    if (error) {
+      logout.mutate();
+      navigate("/login");
+    }
+  }, [error]);
 
   const mergeChildrenPages = (pages, workspace) => {
     const workspaceKeys = new Set(Object.keys(workspace));
@@ -70,8 +81,6 @@ export default function Home() {
       mergeChildrenPages(pages, workspace);
     }
   }, [results]);
-
-  if (error) return <div>Error: {error.message}</div>;
 
   if (isLoading) return <Loader />;
 

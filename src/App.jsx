@@ -9,6 +9,11 @@ function App() {
   const [pages, setPages] = useState([]);
   const [workspace, setWorkspace] = useState([]);
   const [allPages, setAllPages] = useState([]);
+  const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] =
+    useState(10);
+  const [selectedQuestionDifficulty, setSelectedQuestionDifficulty] =
+    useState("");
+  const [notes, setNotes] = useState("");
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -20,6 +25,12 @@ function App() {
           setWorkspace,
           allPages,
           setAllPages,
+          selectedNumberOfQuestions,
+          setSelectedNumberOfQuestions,
+          selectedQuestionDifficulty,
+          setSelectedQuestionDifficulty,
+          notes,
+          setNotes
         }}
       >
         <Router />

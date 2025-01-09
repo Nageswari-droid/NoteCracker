@@ -20,7 +20,11 @@ Deno.serve(async (req) => {
     pageId = body.page_id;
   }
 
-  const fetchChildren = async (blockId: string, accessToken: string, startCursor?: string) => {
+  const fetchChildren = async (
+    blockId: string,
+    accessToken: string,
+    startCursor?: string,
+  ) => {
     let pageContent = "";
     let nextCursor = startCursor || null;
     let hasMore = true;
@@ -37,7 +41,7 @@ Deno.serve(async (req) => {
             page_size: 100,
             ...(nextCursor && { start_cursor: nextCursor }),
           },
-        }
+        },
       );
 
       const data = response.data;
@@ -72,9 +76,12 @@ Deno.serve(async (req) => {
     });
   } catch (error) {
     console.error("Error fetching data from Notion API:", error);
-    return new Response(JSON.stringify({ error: "Error fetching data from Notion API" }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({ error: "Error fetching data from Notion API" }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      },
+    );
   }
 });

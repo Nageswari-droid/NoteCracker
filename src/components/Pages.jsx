@@ -1,11 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Context } from "../context/contextProvider";
-import useSession from "../hooks/useSession";
-import Inputs from "./Inputs";
-import ButtonWithImage from "./shared/ButtonWithIcon";
-import revision from "../assets/revision.png";
-import revisionActive from "../assets/revision_active.png";
-import usePageContent from "../hooks/usePageContent";
 import {
   workspacesTitle,
   workspaceOption,
@@ -17,21 +11,32 @@ import {
   submit,
 } from "../constants/text";
 import { difficultyLevel } from "../constants/difficultyLevel";
-import Loader from "../Loader";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader";
+import useSession from "../hooks/useSession";
+import Inputs from "./Inputs";
+import ButtonWithImage from "./shared/ButtonWithIcon";
+import revision from "../assets/revision.png";
+import revisionActive from "../assets/revision_active.png";
+import usePageContent from "../hooks/usePageContent";
 
 export default function Pages() {
   const session = useSession();
   const { data: sessionData } = session;
   const navigate = useNavigate();
-  const { pages, workspace, allPages } = useContext(Context);
+  const {
+    pages,
+    workspace,
+    allPages,
+    selectedNumberOfQuestions,
+    setSelectedNumberOfQuestions,
+    selectedQuestionDifficulty,
+    setSelectedQuestionDifficulty,
+    setNotes,
+  } = useContext(Context);
   const [selectedWorkspace, setSelectedWorkspace] = useState("");
   const [selectedPage, setSelectedPage] = useState("");
   const [containsPages, setContainsPages] = useState(false);
-  const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] =
-    useState(10);
-  const [selectedQuestionDifficulty, setSelectedQuestionDifficulty] =
-    useState("");
   const [clicked, setClicked] = useState(false);
 
   const { data, isLoading, refetch } = usePageContent(
@@ -43,6 +48,7 @@ export default function Pages() {
 
   useEffect(() => {
     if (data) {
+      setNotes(data);
       navigate("/revision");
     }
   }, [data, navigate]);

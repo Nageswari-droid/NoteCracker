@@ -10,9 +10,9 @@ export default function LogoutBar() {
 
   if (isLoggingOut) return <Loader />;
 
-  const logoutWithNotion = async () => {
+  const logoutWithNotion = () => {
     setIsLoggingOut(true);
-    await logout.mutateAsync();
+    logout.mutate();
     navigate("/login");
   };
 
