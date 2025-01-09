@@ -16,6 +16,14 @@ export default function Router() {
             </AuthRouter>
           }
         />
+        <Route
+          path="/revision"
+          element={
+            <AuthRouter>
+              <div>Hello, welcome!</div>
+            </AuthRouter>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

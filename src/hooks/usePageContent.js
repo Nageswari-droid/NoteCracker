@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export default function usePageContent(accessToken, providerToken, pageId, enable) {
   const listPages = useQuery({

@@ -17,10 +17,13 @@ import {
   submit,
 } from "../constants/text";
 import { difficultyLevel } from "../constants/difficultyLevel";
+import Loader from "../Loader";
+import { useNavigate } from "react-router-dom";
 
 export default function Pages() {
   const session = useSession();
   const { data: sessionData } = session;
+  const navigate = useNavigate();
   const { pages, workspace, allPages } = useContext(Context);
   const [selectedWorkspace, setSelectedWorkspace] = useState("");
   const [selectedPage, setSelectedPage] = useState("");
@@ -38,7 +41,14 @@ export default function Pages() {
     clicked
   );
 
+  useEffect(() => {
+    if (data) {
+      navigate("/revision");
+    }
+  }, [data, navigate]);
+
   const updateSelectedWorkspace = (selectedWorkspace) => {
+    setClicked(false);
     setSelectedWorkspace(selectedWorkspace);
     setSelectedPage("");
     setSelectedQuestionDifficulty("");
@@ -52,6 +62,7 @@ export default function Pages() {
   };
 
   const updateSelectedPage = (selectedPage) => {
+    setClicked(false);
     setSelectedPage(selectedPage);
     setSelectedQuestionDifficulty("");
     setSelectedNumberOfQuestions(10);
@@ -80,6 +91,10 @@ export default function Pages() {
     setClicked(true);
     refetch();
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="bg-[#1a1a19] w-full h-full flex">
