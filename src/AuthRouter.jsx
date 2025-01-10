@@ -10,7 +10,7 @@ export default function AuthRouter({ children }) {
   const { data, isError, isLoading } = session;
 
   useEffect(() => {
-    if (!isLoading && isError) {
+    if (isError) {
       navigate("/login");
     }
   }, [isLoading, isError]);

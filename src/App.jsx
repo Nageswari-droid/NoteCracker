@@ -14,6 +14,15 @@ function App() {
   const [selectedQuestionDifficulty, setSelectedQuestionDifficulty] =
     useState("");
   const [notes, setNotes] = useState("");
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(1);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [showResults, setShowResults] = useState(false);
+
+  const reset = () => {
+    setShowResults(false);
+    setCurrentQuestionIndex(1);
+    setSelectedAnswers({});
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -30,7 +39,14 @@ function App() {
           selectedQuestionDifficulty,
           setSelectedQuestionDifficulty,
           notes,
-          setNotes
+          setNotes,
+          currentQuestionIndex,
+          setCurrentQuestionIndex,
+          selectedAnswers,
+          setSelectedAnswers,
+          showResults,
+          setShowResults,
+          reset,
         }}
       >
         <Router />

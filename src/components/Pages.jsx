@@ -46,9 +46,14 @@ export default function Pages() {
     clicked
   );
 
+  if (selectedWorkspace === "") {
+    setSelectedQuestionDifficulty("");
+    setSelectedNumberOfQuestions(10);
+  }
+
   useEffect(() => {
     if (data) {
-      setNotes(data);
+      setNotes(data?.content);
       navigate("/revision");
     }
   }, [data, navigate]);

@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import AuthRouter from "./AuthRouter";
+import Revise from "./components/Revise";
 
 export default function Router() {
   return (
@@ -20,7 +21,7 @@ export default function Router() {
           path="/revision"
           element={
             <AuthRouter>
-              <div>Hello, welcome!</div>
+              <Revise />
             </AuthRouter>
           }
         />

@@ -1,5 +1,5 @@
 const notionLogin = "Login with Notion";
-const logout = "Logout";
+const logoutTitle = "Logout";
 const cardBody = "Enhance learning with active recall!";
 const homepage = "Home";
 const workspacesTitle = "Workspaces";
@@ -13,7 +13,7 @@ const submit = "Submit";
 
 export {
   notionLogin,
-  logout,
+  logoutTitle,
   cardBody,
   homepage,
   workspacesTitle,

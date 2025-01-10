@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLogoutWithNotion from "../supabase/useLogoutWithNotion";
 import Loader from "../Loader";
+import { logoutTitle } from "../constants/text";
 
 export default function LogoutBar() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function LogoutBar() {
         onClick={logoutWithNotion}
         className="border-2 bg-white border-white text-slate-900 font-semibold py-2 px-4 rounded-md my-4 mr-6 hover:bg-slate-900 hover:text-white cursor-pointer"
       >
-        Logout
+        {logoutTitle}
       </button>
     </div>
   );
