@@ -119,6 +119,7 @@ export default function Pages() {
           updateHandler={updateSelectedWorkspace}
           defaultOption={workspaceOption}
           value={workspace[selectedWorkspace]}
+          isRequired={true}
         />
         {containsPages && selectedWorkspace && (
           <Inputs
@@ -127,6 +128,7 @@ export default function Pages() {
             updateHandler={updateSelectedPage}
             defaultOption={pageOption}
             value={allPages[selectedPage]}
+            isRequired={true}
           />
         )}
         <Inputs
@@ -135,11 +137,13 @@ export default function Pages() {
           updateHandler={updateQuestionDifficulty}
           defaultOption={levelOption}
           value={selectedQuestionDifficulty}
+          isRequired={true}
         />
         <Inputs
           subHead={numberOfQuestionsTitle}
           updateHandler={updateNumberOfQuestions}
           count={selectedNumberOfQuestions}
+          isRequired={false}
         />
         <div className="w-1/5 m-auto font-semibold">
           <ButtonWithImage

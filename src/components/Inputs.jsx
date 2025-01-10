@@ -7,11 +7,14 @@ export default function Inputs({
   updateHandler,
   defaultOption,
   value,
-  count
+  count,
+  isRequired,
 }) {
   return (
     <div className="flex flex-row justify-center w-full mb-4">
-      <div className="w-1/2">{subHead}</div>
+      <div className="w-1/2">
+        {subHead}{isRequired && <span className="text-red-500 text-sm">*</span>}
+      </div>
       {options ? (
         <Option
           arr={options}
@@ -21,11 +24,7 @@ export default function Inputs({
         />
       ) : (
         <div className="w-1/4">
-          <Counter
-            style="w-3/5"
-            updateCounter={updateHandler}
-            count={count}
-          />
+          <Counter style="w-3/5" updateCounter={updateHandler} count={count} />
         </div>
       )}
     </div>

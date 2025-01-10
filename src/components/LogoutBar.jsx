@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useLogoutWithNotion from "../supabase/useLogoutWithNotion";
+import useLogoutWithNotion from "../notion/useLogoutWithNotion";
 import Loader from "../Loader";
 import { logoutTitle } from "../constants/text";
 

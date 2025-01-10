@@ -4,7 +4,7 @@ import Loader from "../Loader";
 import LogoutBar from "./LogoutBar";
 import Pages from "./Pages";
 import defaultDict from "../utils/defaultDict";
-import useLogoutWithNotion from "../supabase/useLogoutWithNotion";
+import useLogoutWithNotion from "../notion/useLogoutWithNotion";
 import Revise from "./Revise";
 import { useContext, useEffect } from "react";
 import { Context } from "../context/contextProvider";

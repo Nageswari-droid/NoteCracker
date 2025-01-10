@@ -2,7 +2,12 @@ import { useState } from "react";
 import { useContext } from "react";
 import { Context } from "../context/contextProvider";
 import Button from "./shared/Button";
-import { results, correctAnswer, yourAnswer, explanation } from "../constants/text";
+import {
+  results,
+  correctAnswer,
+  yourAnswer,
+  explanation,
+} from "../constants/text";
 
 export default function Result({ mcq }) {
   const { selectedAnswers, reset } = useContext(Context);
@@ -35,7 +40,9 @@ export default function Result({ mcq }) {
       {currentResults.map(([key, question]) => (
         <div key={key} className="mb-4">
           <h3 className="font-semibold">{question.question}</h3>
-          <p>{yourAnswer} {selectedAnswers[key]}</p>
+          <p>
+            {yourAnswer} {selectedAnswers[key]}
+          </p>
           <p
             className={`font-semibold ${
               selectedAnswers[key] === question.answer
@@ -45,7 +52,12 @@ export default function Result({ mcq }) {
           >
             {correctAnswer} {question.answer}
           </p>
-          <p className="text-sm text-gray-600">{explanation} {question.explanation}</p>
+          <p className="text-sm text-slate-700">
+            <span className="text-base text-slate-900 font-semibold">
+              {explanation}
+            </span>
+            {question.explanation}
+          </p>
         </div>
       ))}
       <div className="navigation-buttons mt-6 flex justify-between">

@@ -2,7 +2,7 @@ import CardWithButton from "./shared/CardWithButton";
 import notes from "../assets/notes.svg";
 import notion from "../assets/notion.svg";
 import notionFilled from "../assets/notion-filled.svg";
-import useLoginWithNotion from "../supabase/useLoginWithNotion";
+import useLoginWithNotion from "../notion/useLoginWithNotion";
 import useSession from "../hooks/useSession";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
