@@ -4,31 +4,33 @@ import Loader from "../Loader";
 import LogoutBar from "./LogoutBar";
 import Pages from "./Pages";
 import defaultDict from "../utils/defaultDict";
+import useLogoutWithNotion from "../supabase/useLogoutWithNotion";
+import Revise from "./Revise";
 import { useContext, useEffect } from "react";
 import { Context } from "../context/contextProvider";
 import { homepage } from "../constants/text";
-import useLogoutWithNotion from "../supabase/useLogoutWithNotion";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const session = useSession();
-  const { setPages, setAllPages, setWorkspace, allPages } = useContext(Context);
-  const { data: sessionData } = session;
+  const { setPages, setAllPages, setWorkspace, allPages, notes } =
+    useContext(Context);
+  const { data: sessionData, isError } = session;
   const listPages = useListPages(
     sessionData?.accessToken,
     sessionData?.providerToken
   );
   const logout = useLogoutWithNotion();
   const navigate = useNavigate();
-  const { data, error, isLoading } = listPages;
+  const { data, isLoading } = listPages;
   const results = data?.results;
 
   useEffect(() => {
-    if (error) {
+    if (isError) {
       logout.mutate();
       navigate("/login");
     }
-  }, [error]);
+  }, [isError]);
 
   const mergeChildrenPages = (pages, workspace) => {
     const workspaceKeys = new Set(Object.keys(workspace));
@@ -82,12 +84,11 @@ export default function Home() {
     }
   }, [results]);
 
-  if (isLoading) return <Loader />;
-
   return (
     <div className="bg-[#1a1a19] w-full h-full">
       <LogoutBar />
-      {allPages && <Pages />}
+      {allPages && !notes && <Pages />}
+      {notes && <Revise />}
     </div>
   );
 }

@@ -13,8 +13,11 @@ export default function LogoutBar() {
 
   const logoutWithNotion = () => {
     setIsLoggingOut(true);
-    logout.mutate();
-    navigate("/login");
+    logout.mutate(null, {
+      onSuccess: () => {
+        navigate("/login");
+      },
+    });
   };
 
   return (

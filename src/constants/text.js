@@ -10,6 +10,10 @@ const workspaceOption = "Select a workspace";
 const pageOption = "Select a page";
 const levelOption = "Select a level";
 const submit = "Submit";
+const results = "Results";
+const yourAnswer = "Your answer:";
+const correctAnswer = "Correct answer:";
+const explanation = "Explanation:";
 
 export {
   notionLogin,
@@ -24,4 +28,8 @@ export {
   pageOption,
   levelOption,
   submit,
+  results,
+  yourAnswer,
+  correctAnswer,
+  explanation,
 };

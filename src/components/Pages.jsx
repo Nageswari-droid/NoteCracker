@@ -11,7 +11,6 @@ import {
   submit,
 } from "../constants/text";
 import { difficultyLevel } from "../constants/difficultyLevel";
-import { useNavigate } from "react-router-dom";
 import Loader from "../Loader";
 import useSession from "../hooks/useSession";
 import Inputs from "./Inputs";
@@ -23,7 +22,6 @@ import usePageContent from "../hooks/usePageContent";
 export default function Pages() {
   const session = useSession();
   const { data: sessionData } = session;
-  const navigate = useNavigate();
   const {
     pages,
     workspace,
@@ -46,17 +44,18 @@ export default function Pages() {
     clicked
   );
 
-  if (selectedWorkspace === "") {
-    setSelectedQuestionDifficulty("");
-    setSelectedNumberOfQuestions(10);
-  }
+  useEffect(() => {
+    if (selectedWorkspace === "") {
+      setSelectedQuestionDifficulty("");
+      setSelectedNumberOfQuestions(10);
+    }
+  }, [selectedWorkspace, setSelectedQuestionDifficulty, setSelectedNumberOfQuestions]);
 
   useEffect(() => {
     if (data) {
       setNotes(data?.content);
-      navigate("/revision");
     }
-  }, [data, navigate]);
+  }, [data]);
 
   const updateSelectedWorkspace = (selectedWorkspace) => {
     setClicked(false);

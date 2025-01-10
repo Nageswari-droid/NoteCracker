@@ -22,6 +22,7 @@ function App() {
     setShowResults(false);
     setCurrentQuestionIndex(1);
     setSelectedAnswers({});
+    setNotes("");
   };
 
   return (

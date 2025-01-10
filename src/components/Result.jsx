@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { Context } from "../context/contextProvider";
 import Button from "./shared/Button";
+import { results, correctAnswer, yourAnswer, explanation } from "../constants/text";
 
 export default function Result({ mcq }) {
   const { selectedAnswers, reset } = useContext(Context);
-  const navigate = useNavigate();
 
   const [currentResultPage, setCurrentResultPage] = useState(0);
 
@@ -16,7 +15,6 @@ export default function Result({ mcq }) {
     } else {
       setCurrentResultPage(0);
       reset();
-      navigate("/");
     }
   };
 
@@ -33,21 +31,21 @@ export default function Result({ mcq }) {
 
   return (
     <div className="results">
-      <h2 className="text-xl font-bold mb-4">Results</h2>
+      <h2 className="text-xl font-bold mb-4">{results}</h2>
       {currentResults.map(([key, question]) => (
         <div key={key} className="mb-4">
           <h3 className="font-semibold">{question.question}</h3>
-          <p>Your answer: {selectedAnswers[key]}</p>
+          <p>{yourAnswer} {selectedAnswers[key]}</p>
           <p
             className={`font-semibold ${
               selectedAnswers[key] === question.answer
-                ? "text-green-500"
-                : "text-red-500"
+                ? "text-[#539e75]"
+                : "text-[#a70000]"
             }`}
           >
-            Correct answer: {question.answer}
+            {correctAnswer} {question.answer}
           </p>
-          <p className="text-sm text-gray-600">{question.explanation}</p>
+          <p className="text-sm text-gray-600">{explanation} {question.explanation}</p>
         </div>
       ))}
       <div className="navigation-buttons mt-6 flex justify-between">
