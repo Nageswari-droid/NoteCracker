@@ -49,7 +49,11 @@ export default function Pages() {
       setSelectedQuestionDifficulty("");
       setSelectedNumberOfQuestions(10);
     }
-  }, [selectedWorkspace, setSelectedQuestionDifficulty, setSelectedNumberOfQuestions]);
+  }, [
+    selectedWorkspace,
+    setSelectedQuestionDifficulty,
+    setSelectedNumberOfQuestions,
+  ]);
 
   useEffect(() => {
     if (data) {
@@ -143,6 +147,11 @@ export default function Pages() {
             activeIcon={revisionActive}
             label={submit}
             onClickHandler={handleClick}
+            isDisabled={
+              selectedWorkspace === "" ||
+              selectedPage === "" ||
+              selectedQuestionDifficulty === ""
+            }
           />
         </div>
       </div>
