@@ -6,15 +6,22 @@ import Pages from "./Pages";
 import defaultDict from "../utils/defaultDict";
 import useLogoutWithNotion from "../notion/useLogoutWithNotion";
 import Revise from "./Revise";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/contextProvider";
 import { homepage } from "../constants/text";
 import { useNavigate } from "react-router-dom";
+import prompt from "../constants/prompt";
+import useLLM from "../hooks/useLLM";
 
 export default function Home() {
   const session = useSession();
-  const { setPages, setAllPages, setWorkspace, allPages, notes } =
-    useContext(Context);
+  const {
+    setPages,
+    setAllPages,
+    setWorkspace,
+    allPages,
+    notes,
+  } = useContext(Context);
   const { data: sessionData, isError } = session;
   const listPages = useListPages(
     sessionData?.accessToken,
@@ -24,13 +31,6 @@ export default function Home() {
   const navigate = useNavigate();
   const { data, isLoading } = listPages;
   const results = data?.results;
-
-  useEffect(() => {
-    if (isError) {
-      logout.mutate();
-      navigate("/login");
-    }
-  }, [isError]);
 
   const mergeChildrenPages = (pages, workspace) => {
     const workspaceKeys = new Set(Object.keys(workspace));
@@ -83,6 +83,10 @@ export default function Home() {
       mergeChildrenPages(pages, workspace);
     }
   }, [results]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="bg-[#1a1a19] w-full h-full">
