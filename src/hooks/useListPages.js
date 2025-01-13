@@ -1,38 +1,52 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 export default function useListPages(accessToken, providerToken) {
-  const listPages = useQuery({
-    queryKey: ["listPages"],
-    queryFn: async () => {
-      const cacheKey = "notion_pages_cache";
-      const cacheData = sessionStorage.getItem(cacheKey);
+    const [error, setError] = useState(null);
 
-      if (cacheData) return JSON.parse(cacheData);
+    const listPages = useQuery({
+        queryKey: ["listPages"],
+        queryFn: async() => {
+            if (!accessToken || !providerToken) {
+                return null;
+            }
 
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_BASE_URL}/notion_pages`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            name: "Functions",
-            providerToken: providerToken,
-          }),
-        }
-      );
+            const cacheKey = "notion_pages_cache";
+            const cacheData = sessionStorage.getItem(cacheKey);
 
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
+            if (cacheData) {
+                return JSON.parse(cacheData);
+            }
 
-      const data = await response.json();
-      sessionStorage.setItem(cacheKey, JSON.stringify(data));
-      return data;
-    },
-  });
+            try {
+                const response = await fetch(
+                    `${import.meta.env.VITE_SUPABASE_BASE_URL}/notion_pages`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${accessToken}`,
+                        },
+                        body: JSON.stringify({
+                            name: "Functions",
+                            providerToken: providerToken,
+                        }),
+                    }
+                );
 
-  return listPages;
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                sessionStorage.setItem(cacheKey, JSON.stringify(data));
+                return data;
+            } catch (err) {
+                console.error("Fetch List Pages error:", err);
+                setError("Could not fetch list pages. Please try again later.");
+                return null;
+            }
+        },
+    });
+
+    return { listPages, error };
 }

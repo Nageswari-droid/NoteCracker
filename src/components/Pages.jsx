@@ -18,7 +18,6 @@ import ButtonWithImage from "./shared/ButtonWithIcon";
 import revision from "../assets/revision.png";
 import revisionActive from "../assets/revision_active.png";
 import usePageContent from "../hooks/usePageContent";
-import { useNavigate } from "react-router-dom";
 import useLogoutWithNotion from "../notion/useLogoutWithNotion";
 import prompt from "../constants/prompt";
 
@@ -38,16 +37,15 @@ export default function Pages({ setMcq }) {
     prompt +
     `\nthe number of questions: ${selectedNumberOfQuestions} \n` +
     `\ncomplexity level: ${selectedQuestionDifficulty} \n`;
-
-  const navigate = useNavigate();
-  const { data, isLoading, refetch, error } = usePageContent(
+  const { pageContent, error } = usePageContent(
     sessionData?.accessToken,
     sessionData?.providerToken,
     selectedPage,
     context,
     clicked
   );
-  const { logout } = useLogoutWithNotion();
+  const { data, isLoading, refetch } = pageContent;
+  const logout = useLogoutWithNotion();
 
   useEffect(() => {
     if (selectedWorkspace === "") {
@@ -61,11 +59,10 @@ export default function Pages({ setMcq }) {
   ]);
 
   useEffect(() => {
-    if (error && error.response?.status === 400) {
+    if (error) {
       logout.mutate();
-      navigate("/login");
     }
-  }, [error, navigate]);
+  }, [error]);
 
   useEffect(() => {
     if (data) {

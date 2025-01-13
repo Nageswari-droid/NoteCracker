@@ -8,21 +8,18 @@ import Revise from "./Revise";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/contextProvider";
 import { homepage } from "../constants/text";
-import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [mcq, setMcq] = useState(null);
   const session = useSession();
-  const { setPages, setAllPages, setWorkspace, allPages, notes } =
-    useContext(Context);
+  const { setPages, setAllPages, setWorkspace, allPages } = useContext(Context);
   const { data: sessionData, isLoading: sessionLoading } = session;
-  const listPages = useListPages(
+  const { listPages, error } = useListPages(
     sessionData?.accessToken,
     sessionData?.providerToken
   );
-  const { logout } = useLogoutWithNotion();
-  const navigate = useNavigate();
-  const { data, error, isLoading } = listPages;
+  const logout = useLogoutWithNotion();
+  const { data, isLoading } = listPages;
   const results = data?.results;
 
   const mergeChildrenPages = (pages, workspace) => {
@@ -48,11 +45,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (error && error.response?.status === 400) {
+    if (error) {
       logout.mutate();
-      navigate("/login");
     }
-  }, [error, navigate, logout]);
+  }, [error, logout]);
 
   useEffect(() => {
     if (results) {
