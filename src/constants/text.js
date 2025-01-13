@@ -11,9 +11,9 @@ const pageOption = "Select a page";
 const levelOption = "Select a level";
 const submit = "Submit";
 const results = "Results";
-const yourAnswer = "Your answer:";
-const correctAnswer = "Correct answer:";
-const explanation = "Explanation:";
+const yourAnswer = "Your answer: ";
+const correctAnswer = "Correct answer: ";
+const explanation = "Explanation: ";
 const returnToLogin = "Return to login";
 
 export {

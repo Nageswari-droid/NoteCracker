@@ -6,21 +6,14 @@ import Logout from "./components/LogoutBar";
 import ErrorPage from "./components/Error";
 import Revise from "./components/Revise";
 
-const homePage = () => {
+const Layout = (props) => {
   return (
-    <div className="bg-[#1a1a19] h-full w-full">
-      <Logout />
-      <Home />
-    </div>
-  );
-};
-
-const revisionPage = () => {
-  return (
-    <div className="bg-[#1a1a19] h-full w-full">
-      <Logout />
-      <Revise />
-    </div>
+    <ProtectedRoute>
+      <div className="bg-[#1a1a19] h-full w-full">
+        <Logout />
+        {props.children}
+      </div>
+    </ProtectedRoute>
   );
 };
 
@@ -31,11 +24,19 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         <Route
           path="/pages"
-          element={<ProtectedRoute>{homePage()}</ProtectedRoute>}
+          element={
+            <Layout>
+              <Home />
+            </Layout>
+          }
         />
         <Route
           path="/revise"
-          element={<ProtectedRoute>{revisionPage()}</ProtectedRoute>}
+          element={
+            <Layout>
+              <Revise />
+            </Layout>
+          }
         />
         <Route
           path="/error"
@@ -47,7 +48,11 @@ export default function Router() {
         />
         <Route
           path="*"
-          element={<ProtectedRoute>{homePage()}</ProtectedRoute>}
+          element={
+            <Layout>
+              <Home />
+            </Layout>
+          }
         />
       </Routes>
     </BrowserRouter>
