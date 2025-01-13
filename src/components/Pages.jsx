@@ -11,6 +11,7 @@ import {
   submit,
 } from "../constants/text";
 import { difficultyLevel } from "../constants/difficultyLevel";
+import { useNavigate } from "react-router-dom";
 import Loader from "../Loader";
 import useSession from "../hooks/useSession";
 import Inputs from "./Inputs";
@@ -18,12 +19,12 @@ import ButtonWithImage from "./shared/ButtonWithIcon";
 import revision from "../assets/revision.png";
 import revisionActive from "../assets/revision_active.png";
 import usePageContent from "../hooks/usePageContent";
-import useLogoutWithNotion from "../notion/useLogoutWithNotion";
 import prompt from "../constants/prompt";
 
 export default function Pages({ setMcq }) {
   const session = useSession();
   const { data: sessionData, isLoading: sessionLoading } = session;
+  const navigate = useNavigate();
   const { pages, workspace, allPages } = useContext(Context);
   const [selectedWorkspace, setSelectedWorkspace] = useState("");
   const [selectedPage, setSelectedPage] = useState("");
@@ -45,7 +46,6 @@ export default function Pages({ setMcq }) {
     clicked
   );
   const { data, isLoading, refetch } = pageContent;
-  const logout = useLogoutWithNotion();
 
   useEffect(() => {
     if (selectedWorkspace === "") {
@@ -60,9 +60,9 @@ export default function Pages({ setMcq }) {
 
   useEffect(() => {
     if (error) {
-      logout.mutate();
+      navigate("/error", { replace: true });
     }
-  }, [error]);
+  }, [error, navigate]);
 
   useEffect(() => {
     if (data) {

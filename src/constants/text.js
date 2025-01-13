@@ -14,6 +14,7 @@ const results = "Results";
 const yourAnswer = "Your answer:";
 const correctAnswer = "Correct answer:";
 const explanation = "Explanation:";
+const returnToLogin = "Return to login";
 
 export {
   notionLogin,
@@ -32,4 +33,5 @@ export {
   yourAnswer,
   correctAnswer,
   explanation,
+  returnToLogin,
 };

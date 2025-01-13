@@ -3,22 +3,22 @@ import useSession from "../hooks/useSession";
 import Loader from "../Loader";
 import Pages from "./Pages";
 import defaultDict from "../utils/defaultDict";
-import useLogoutWithNotion from "../notion/useLogoutWithNotion";
 import Revise from "./Revise";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/contextProvider";
 import { homepage } from "../constants/text";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [mcq, setMcq] = useState(null);
   const session = useSession();
+  const navigate = useNavigate();
   const { setPages, setAllPages, setWorkspace, allPages } = useContext(Context);
   const { data: sessionData, isLoading: sessionLoading } = session;
   const { listPages, error } = useListPages(
     sessionData?.accessToken,
     sessionData?.providerToken
   );
-  const logout = useLogoutWithNotion();
   const { data, isLoading } = listPages;
   const results = data?.results;
 
@@ -46,9 +46,9 @@ export default function Home() {
 
   useEffect(() => {
     if (error) {
-      logout.mutate();
+      navigate("/error", { replace: true });
     }
-  }, [error, logout]);
+  }, [error, navigate]);
 
   useEffect(() => {
     if (results) {
@@ -86,7 +86,7 @@ export default function Home() {
 
   return (
     <div className="bg-[#1a1a19] w-full h-full">
-      {allPages && !mcq && <Pages setMcq={setMcq} />}
+      {Object.keys(allPages).length > 0 && !mcq && <Pages setMcq={setMcq} />}
       {mcq && <Revise mcq={mcq} setMcq={setMcq} />}
     </div>
   );
