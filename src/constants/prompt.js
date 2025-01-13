@@ -48,9 +48,18 @@ Important formatting requirements:
 8. Each question object should be comma-separated
 9. The entire response should be wrapped in curly braces {}
 10. Each object should have a unique key (e.g., 1, 2, 3, etc.)
+11. The response must contain only the JSON object - no additional text
+12. No comments
 
-Example of expected format:
-{
+Before sending the response:
+1. Validate the JSON string using JSON.parse()
+2. If validation fails, identify and fix the issues
+3. Only send the response after successful validation
+4. No response should be sent until it passes JSON.parse()
+5. The response must exactly match the format
+
+Example of response format:
+"{
     "1": {
         "question": "What is the capital of France?",
         "options": ["Paris", "London", "Berlin", "Madrid"],
@@ -67,7 +76,7 @@ Example of expected format:
     "4": {...},
     "5": {...},
     ... continue until all questions are included
-}
+}"
 
 Example:
 Sample Note:

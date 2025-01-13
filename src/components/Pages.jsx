@@ -18,31 +18,36 @@ import ButtonWithImage from "./shared/ButtonWithIcon";
 import revision from "../assets/revision.png";
 import revisionActive from "../assets/revision_active.png";
 import usePageContent from "../hooks/usePageContent";
+import { useNavigate } from "react-router-dom";
+import useLogoutWithNotion from "../notion/useLogoutWithNotion";
+import prompt from "../constants/prompt";
 
-export default function Pages() {
+export default function Pages({ setMcq }) {
   const session = useSession();
-  const { data: sessionData } = session;
-  const {
-    pages,
-    workspace,
-    allPages,
-    selectedNumberOfQuestions,
-    setSelectedNumberOfQuestions,
-    selectedQuestionDifficulty,
-    setSelectedQuestionDifficulty,
-    setNotes,
-  } = useContext(Context);
+  const { data: sessionData, isLoading: sessionLoading } = session;
+  const { pages, workspace, allPages } = useContext(Context);
   const [selectedWorkspace, setSelectedWorkspace] = useState("");
   const [selectedPage, setSelectedPage] = useState("");
+  const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] =
+    useState(10);
+  const [selectedQuestionDifficulty, setSelectedQuestionDifficulty] =
+    useState("");
   const [containsPages, setContainsPages] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const context =
+    prompt +
+    `\nthe number of questions: ${selectedNumberOfQuestions} \n` +
+    `\ncomplexity level: ${selectedQuestionDifficulty} \n`;
 
-  const { data, isLoading, refetch } = usePageContent(
+  const navigate = useNavigate();
+  const { data, isLoading, refetch, error } = usePageContent(
     sessionData?.accessToken,
     sessionData?.providerToken,
     selectedPage,
+    context,
     clicked
   );
+  const { logout } = useLogoutWithNotion();
 
   useEffect(() => {
     if (selectedWorkspace === "") {
@@ -56,8 +61,22 @@ export default function Pages() {
   ]);
 
   useEffect(() => {
+    if (error && error.response?.status === 400) {
+      logout.mutate();
+      navigate("/login");
+    }
+  }, [error, navigate]);
+
+  useEffect(() => {
     if (data) {
-      setNotes(data?.content);
+      const content = data.content;
+
+      try {
+        let parsedData = JSON.parse(content);
+        setMcq(parsedData);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }, [data]);
 
@@ -102,11 +121,12 @@ export default function Pages() {
   };
 
   const handleClick = () => {
+    console.log(context);
     setClicked(true);
     refetch();
   };
 
-  if (isLoading) {
+  if (isLoading || sessionLoading) {
     return <Loader />;
   }
 

@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
-import AuthRouter from "./AuthRouter";
+import ProtectedRoute from "./ProtectedRoute";
+import Logout from "./components/LogoutBar";
 
 export default function Router() {
   return (
@@ -11,9 +12,10 @@ export default function Router() {
         <Route
           path="/"
           element={
-            <AuthRouter>
+            <ProtectedRoute>
+              <Logout />
               <Home />
-            </AuthRouter>
+            </ProtectedRoute>
           }
         />
       </Routes>

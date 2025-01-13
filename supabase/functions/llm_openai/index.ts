@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
                     {
                         role: "system",
                         content:
-                            "You are an expert in creating educational content. Generate multiple-choice questions based on the provided notes.",
+                            "You are an expert in creating educational content. Generate multiple-choice questions based on the provided notes. Ensure the questions are relevant to the content and avoid generic responses.",
                     },
                     {
                         role: "user",

@@ -1,7 +1,6 @@
 import useListPages from "../hooks/useListPages";
 import useSession from "../hooks/useSession";
 import Loader from "../Loader";
-import LogoutBar from "./LogoutBar";
 import Pages from "./Pages";
 import defaultDict from "../utils/defaultDict";
 import useLogoutWithNotion from "../notion/useLogoutWithNotion";
@@ -10,26 +9,20 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/contextProvider";
 import { homepage } from "../constants/text";
 import { useNavigate } from "react-router-dom";
-import prompt from "../constants/prompt";
-import useLLM from "../hooks/useLLM";
 
 export default function Home() {
+  const [mcq, setMcq] = useState(null);
   const session = useSession();
-  const {
-    setPages,
-    setAllPages,
-    setWorkspace,
-    allPages,
-    notes,
-  } = useContext(Context);
-  const { data: sessionData, isError } = session;
+  const { setPages, setAllPages, setWorkspace, allPages, notes } =
+    useContext(Context);
+  const { data: sessionData, isLoading: sessionLoading } = session;
   const listPages = useListPages(
     sessionData?.accessToken,
     sessionData?.providerToken
   );
-  const logout = useLogoutWithNotion();
+  const { logout } = useLogoutWithNotion();
   const navigate = useNavigate();
-  const { data, isLoading } = listPages;
+  const { data, error, isLoading } = listPages;
   const results = data?.results;
 
   const mergeChildrenPages = (pages, workspace) => {
@@ -53,6 +46,13 @@ export default function Home() {
 
     setPages(pages);
   };
+
+  useEffect(() => {
+    if (error && error.response?.status === 400) {
+      logout.mutate();
+      navigate("/login");
+    }
+  }, [error, navigate, logout]);
 
   useEffect(() => {
     if (results) {
@@ -82,17 +82,16 @@ export default function Home() {
       setWorkspace(workspace);
       mergeChildrenPages(pages, workspace);
     }
-  }, [results]);
+  }, [results, setAllPages, setWorkspace]);
 
-  if (isLoading) {
+  if (sessionLoading || isLoading) {
     return <Loader />;
   }
 
   return (
     <div className="bg-[#1a1a19] w-full h-full">
-      <LogoutBar />
-      {allPages && !notes && <Pages />}
-      {notes && <Revise />}
+      {allPages && !mcq && <Pages setMcq={setMcq} />}
+      {mcq && <Revise mcq={mcq} setMcq={setMcq} />}
     </div>
   );
 }

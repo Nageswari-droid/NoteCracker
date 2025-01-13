@@ -1,16 +1,13 @@
-import { useContext } from "react";
-import { Context } from "../context/contextProvider";
 import Button from "./shared/Button";
 
-export default function Quiz({ mcq }) {
-  const {
-    currentQuestionIndex,
-    setCurrentQuestionIndex,
-    setShowResults,
-    selectedAnswers,
-    setSelectedAnswers,
-  } = useContext(Context);
-
+export default function Quiz({
+  mcq,
+  setShowResults,
+  currentQuestionIndex,
+  setCurrentQuestionIndex,
+  selectedAnswers,
+  setSelectedAnswers,
+}) {
   const handleOptionSelect = (option) => {
     setSelectedAnswers({
       ...selectedAnswers,

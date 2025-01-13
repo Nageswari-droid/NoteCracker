@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import useLogoutWithNotion from "../notion/useLogoutWithNotion";
 import Loader from "../Loader";
 import { logoutTitle } from "../constants/text";
 
 export default function LogoutBar() {
-  const navigate = useNavigate();
   const logout = useLogoutWithNotion();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
@@ -13,11 +11,7 @@ export default function LogoutBar() {
 
   const logoutWithNotion = () => {
     setIsLoggingOut(true);
-    logout.mutate(null, {
-      onSuccess: () => {
-        navigate("/login");
-      },
-    });
+    logout.mutateAsync();
   };
 
   return (

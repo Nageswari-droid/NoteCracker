@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useContext } from "react";
-import { Context } from "../context/contextProvider";
 import Button from "./shared/Button";
 import {
   results,
@@ -9,9 +7,7 @@ import {
   explanation,
 } from "../constants/text";
 
-export default function Result({ mcq }) {
-  const { selectedAnswers, reset } = useContext(Context);
-
+export default function Result({ mcq, reset, selectedAnswers }) {
   const [currentResultPage, setCurrentResultPage] = useState(0);
 
   const handleResultNext = () => {
