@@ -10,10 +10,9 @@ import { homepage } from "../constants/text";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-  const [mcq, setMcq] = useState(null);
   const session = useSession();
   const navigate = useNavigate();
-  const { setPages, setAllPages, setWorkspace, allPages } = useContext(Context);
+  const { setPages, setAllPages, setWorkspace, allPages, mcq, setMcq } = useContext(Context);
   const { data: sessionData, isLoading: sessionLoading } = session;
   const { listPages, error } = useListPages(
     sessionData?.accessToken,
@@ -86,8 +85,7 @@ export default function Home() {
 
   return (
     <div className="bg-[#1a1a19] w-full h-full">
-      {Object.keys(allPages).length > 0 && !mcq && <Pages setMcq={setMcq} />}
-      {mcq && <Revise mcq={mcq} setMcq={setMcq} />}
+      {allPages && <Pages setMcq={setMcq} />}
     </div>
   );
 }

@@ -67,15 +67,15 @@ export default function Pages({ setMcq }) {
   useEffect(() => {
     if (data) {
       const content = data.content;
-
       try {
         let parsedData = JSON.parse(content);
         setMcq(parsedData);
+        navigate("/revise");
       } catch (error) {
         console.log(error);
       }
     }
-  }, [data]);
+  }, [data, navigate]);
 
   const updateSelectedWorkspace = (selectedWorkspace) => {
     setClicked(false);

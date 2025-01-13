@@ -16,7 +16,7 @@ export default function Login() {
 
   useEffect(() => {
     if (!isError && data) {
-      navigate("/");
+      navigate("/pages");
     }
   }, [data, isError]);
 

@@ -6,14 +6,17 @@ import {
   yourAnswer,
   explanation,
 } from "../constants/text";
+import { useNavigate } from "react-router-dom";
 
 export default function Result({ mcq, reset, selectedAnswers }) {
   const [currentResultPage, setCurrentResultPage] = useState(0);
+  const navigate = useNavigate();
 
   const handleResultNext = () => {
     if (currentResultPage < totalResultsPages - 1) {
       setCurrentResultPage(currentResultPage + 1);
     } else {
+      navigate("/pages");
       setCurrentResultPage(0);
       reset();
     }

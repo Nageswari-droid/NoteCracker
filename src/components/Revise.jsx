@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Context } from "../context/contextProvider";
 import Result from "./Result";
 import Quiz from "./Quiz";
 
-export default function Revise({ mcq, setMcq }) {
+export default function Revise() {
   const [showResults, setShowResults] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(1);
   const [selectedAnswers, setSelectedAnswers] = useState({});
+  const { mcq, setMcq } = useContext(Context);
 
   const reset = () => {
-    setCurrentQuestionIndex(1);
-    setSelectedAnswers(null);
-    setShowResults(false);
     setMcq(null);
+    setCurrentQuestionIndex(1);
+    setSelectedAnswers({});
+    setShowResults(false);
   };
 
   return (
