@@ -121,7 +121,6 @@ export default function Pages({ setMcq }) {
   };
 
   const handleClick = () => {
-    console.log(context);
     setClicked(true);
     refetch();
   };

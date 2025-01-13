@@ -11,6 +11,7 @@ export default function useLogoutWithNotion() {
             const { error } = await supabase.auth.signOut();
             sessionStorage.clear();
             if (error) {
+                console.error("Logout error:", error.message);
                 throw new Error(error.message);
             }
         },
