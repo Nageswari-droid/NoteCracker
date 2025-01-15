@@ -15,6 +15,11 @@ const yourAnswer = "Your answer: ";
 const correctAnswer = "Correct answer: ";
 const explanation = "Explanation: ";
 const returnToLogin = "Return to login";
+const chooseAgain = "Choose Again";
+const pageContentNotFound = "Page Content Not Found!";
+const pageContentNotFoundMessage =
+  "If the current page contains only subpages, you can choose them from the pages dropdown menu within the selected workspace.";
+const apiError = "Could not fetch data. Please try again later.";
 
 export {
   notionLogin,
@@ -34,4 +39,8 @@ export {
   correctAnswer,
   explanation,
   returnToLogin,
+  chooseAgain,
+  pageContentNotFound,
+  pageContentNotFoundMessage,
+  apiError,
 };

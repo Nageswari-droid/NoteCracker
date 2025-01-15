@@ -52,15 +52,20 @@ Deno.serve(async (req) => {
         const type = element["type"];
         const richText = element[type]?.["rich_text"];
 
-        if (richText) {
-          richText.forEach((txt: { plain_text: string }) => {
-            pageContent += txt["plain_text"] + "\n";
-          });
-        }
+        if (element[type]?.["rich_text"]) {
+          if (richText) {
+            richText.forEach((txt: { plain_text: string }) => {
+              pageContent += txt["plain_text"] + "\n";
+            });
+          }
 
-        if (element.has_children) {
-          const childrenContent = await fetchChildren(element.id, accessToken);
-          pageContent += childrenContent;
+          if (element.has_children) {
+            const childrenContent = await fetchChildren(
+              element.id,
+              accessToken,
+            );
+            pageContent += childrenContent;
+          }
         }
       }
     }

@@ -20,6 +20,7 @@ import revision from "../assets/revision.png";
 import revisionActive from "../assets/revision_active.png";
 import usePageContent from "../hooks/usePageContent";
 import prompt from "../constants/prompt";
+import Popup from "./Popup";
 
 export default function Pages({ setMcq }) {
   const session = useSession();
@@ -28,6 +29,8 @@ export default function Pages({ setMcq }) {
   const { pages, workspace, allPages } = useContext(Context);
   const [selectedWorkspace, setSelectedWorkspace] = useState("");
   const [selectedPage, setSelectedPage] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupError, setPopupError] = useState({});
   const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] =
     useState(10);
   const [selectedQuestionDifficulty, setSelectedQuestionDifficulty] =
@@ -66,16 +69,23 @@ export default function Pages({ setMcq }) {
 
   useEffect(() => {
     if (data) {
-      const content = data.content;
-      try {
-        let parsedData = JSON.parse(content);
-        setMcq(parsedData);
-        navigate("/revise");
-      } catch (error) {
-        console.log(error);
+      setClicked(false);
+
+      if (data.error) {
+        setPopupError(data.error);
+        setShowPopup(true);
+      } else {
+        const content = data.content;
+
+        try {
+          setMcq(JSON.parse(content));
+          navigate("/revise");
+        } catch (error) {
+          console.error(error);
+        }
       }
     }
-  }, [data, navigate]);
+  }, [data]);
 
   const updateSelectedWorkspace = (selectedWorkspace) => {
     setClicked(false);
@@ -120,6 +130,10 @@ export default function Pages({ setMcq }) {
   const handleClick = () => {
     setClicked(true);
     refetch();
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
   };
 
   if (isLoading || sessionLoading) {
@@ -175,6 +189,13 @@ export default function Pages({ setMcq }) {
           />
         </div>
       </div>
+      {showPopup && (
+        <Popup
+          heading={popupError.title}
+          message={popupError.message}
+          onClose={handleClosePopup}
+        />
+      )}
     </div>
   );
 }
