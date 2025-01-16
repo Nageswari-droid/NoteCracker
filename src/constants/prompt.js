@@ -1,6 +1,77 @@
 const prompt = `
-I need help with active recall for interview preparation through multiple-choice questions (MCQs).
+I need help with active recall for interview/exam preparation through multiple-choice questions (MCQs).
 
+IMPORTANT: Before generating any questions, the system will first validate the provided notes using these criteria:
+
+Content Validity Check:
+a) Notes must contain educational/professional content suitable for active recall and meaningful revision
+b) Content must be related to academic or professional subjects such as:
+    - Academic subjects (mathematics, science, literature, history, economics, etc.)
+    - Technical topics (programming, engineering, architecture, etc.)
+    - Professional concepts (business management, finance, marketing, etc.)
+    - Research materials (academic papers, scientific theories, case studies)
+    - Interview preparation content (technical concepts, domain knowledge)
+c) Must contain clear concepts, definitions, or processes that can be tested meaningfully
+d) Should have sufficient depth to generate questions at different complexity levels
+
+The following types of personal notes are NOT valid for question generation, even if they're important to remember:
+1. Daily routines or schedules
+2. Shopping lists or inventory
+3. Weight/fitness trackers
+4. Travel plans or itineraries
+5. Project summaries or ideas
+6. Resource/reference lists
+7. To-do lists or checklists
+8. Workout routines
+9. Diet plans
+10. Meeting notes or minutes
+11. Personal goals or reminders
+12. Contact lists or directories
+
+Examples of Valid Notes:
+What is Cloud Computing?
+Cloud computing is the practice of using remote servers hosted on the internet to store, manage, and process data, rather than local servers or personal computers.
+
+Key Characteristics:
+On-demand self-service
+Broad network access
+Resource pooling
+Rapid elasticity
+Measured service
+
+Examples of Invalid Notes:
+1. Shopping List:
+Milk (2 gallons)
+Eggs
+Bread
+
+2. Daily Schedule:
+9:00 AM - Team meeting
+12:00 PM - Lunch
+2:00 PM - Client call
+
+Rationale for Validation:
+1. Valid notes should contain content worth studying and revising
+2. Questions generated should contribute to learning and understanding
+3. Personal task lists and schedules, while important, aren't suitable for educational review
+4. The goal is to test understanding of concepts, not recall of personal information
+
+If the notes are invalid:
+1. Format the error response as a JSON object:
+{
+    "invalid": "The valid notes should consists of [first sentence explaining why the notes are invalid]. [Second sentence explaining what would make them valid]"
+}
+
+2. Before sending the response:
+a) Validate the JSON string using JSON.parse()
+b) Ensure all quotes and special characters are properly escaped
+c) Fix any validation issues before sending
+d) Only send after successful validation
+e) The response must contain only the JSON object - no additional text
+f) Use double quotes for all strings (required for valid JSON)
+g) Use escape sequences (") for any double quotes within strings
+
+If the notes are valid, proceed with question generation according to these parameters:
 Based on your specified complexity level, I will generate:
 1. Unique MCQs at your chosen difficulty level (no repetition of questions)
 2. Each question will have four options (A, B, C, and D)
@@ -111,7 +182,7 @@ D) First available server selection
 Important Notes: 
 1. The questions will be tailored to match your specified complexity level. The difficulty of questions generated will align with the complexity level you choose (Easy/Medium/Difficult).
 2. After the '#################' marker, you'll find two key specifications: the number of questions and the complexity level. The MCQs and answer key will be generated according to these parameters.
-3. Just return the generated questions and answer key. Nothing else!! Don't add any other text like "### Multiple-Choice Questions"
+3. Just return the generated questions and answer key. Nothing else!! Don't add any other text like "### Multiple-Choice Questions, Answer Key ###, json quotes". 
 
 Here are my notes:
 #################

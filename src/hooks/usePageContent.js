@@ -79,7 +79,6 @@ export default function usePageContent(
 
       if (cacheData) {
         let parsedData = JSON.parse(cacheData).content;
-
         return await validateAndFetchLLMData(parsedData);
       }
 

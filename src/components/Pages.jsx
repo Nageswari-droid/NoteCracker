@@ -31,6 +31,7 @@ export default function Pages({ setMcq }) {
   const [selectedPage, setSelectedPage] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [popupError, setPopupError] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] =
     useState(10);
   const [selectedQuestionDifficulty, setSelectedQuestionDifficulty] =
@@ -48,7 +49,7 @@ export default function Pages({ setMcq }) {
     context,
     clicked
   );
-  const { data, isLoading, refetch } = pageContent;
+  const { data, refetch } = pageContent;
 
   useEffect(() => {
     if (selectedWorkspace === "") {
@@ -67,19 +68,34 @@ export default function Pages({ setMcq }) {
     }
   }, [error, navigate]);
 
+  const addPopupContent = (content) => {
+    setPopupError(content);
+    setShowPopup(true);
+  };
+
   useEffect(() => {
     if (data) {
       setClicked(false);
+      setIsLoading(false);
 
       if (data.error) {
-        setPopupError(data.error);
-        setShowPopup(true);
+        addPopupContent(data.error);
       } else {
         const content = data.content;
 
         try {
-          setMcq(JSON.parse(content));
-          navigate("/revise");
+          const parsedContent = JSON.parse(content);
+          const invalidReason = parsedContent["invalid"];
+          if (invalidReason) {
+            let invalid = {
+              title: "Invalid Page Content!",
+              message: invalidReason,
+            };
+            addPopupContent(invalid);
+          } else {
+            setMcq(parsedContent);
+            navigate("/revise");
+          }
         } catch (error) {
           console.error(error);
         }
@@ -129,6 +145,7 @@ export default function Pages({ setMcq }) {
 
   const handleClick = () => {
     setClicked(true);
+    setIsLoading(true);
     refetch();
   };
 
