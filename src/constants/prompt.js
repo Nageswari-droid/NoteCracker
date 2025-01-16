@@ -14,19 +14,46 @@ b) Content must be related to academic or professional subjects such as:
 c) Must contain clear concepts, definitions, or processes that can be tested meaningfully
 d) Should have sufficient depth to generate questions at different complexity levels
 
-The following types of personal notes are NOT valid for question generation, even if they're important to remember:
-1. Daily routines or schedules
-2. Shopping lists or inventory
-3. Weight/fitness trackers
-4. Travel plans or itineraries
-5. Project summaries or ideas
-6. Resource/reference lists
-7. To-do lists or checklists
-8. Workout routines
-9. Diet plans
-10. Meeting notes or minutes
-11. Personal goals or reminders
-12. Contact lists or directories
+The following types of content are NOT valid for question generation:
+1. Personal Information and Records:
+    a) Security questions or answers
+    b) Personal identification numbers (DS160, SSN, etc.)
+    c) Passwords or access codes
+    d) Family information or details
+    e) Personal or family member descriptions
+    f) Private/confidential information
+    g) No further validation should be performed if any of these are found.
+
+2. Lists Without Educational Content:
+    a) Organization names
+    b) Company directories
+    c) Resource lists
+    d) Program names
+    e) Conference names
+    f) Association lists
+    g) Network/community lists
+
+3. Application/Interview Materials:
+    a) Personal statements
+    b) Interview answers
+    c) Job application responses
+    d) Career journey descriptions
+    e) Self-introduction content
+    f) Experience descriptions
+    g) Cover letter content
+
+4. Personal Management Content:
+    a) Daily routines/schedules
+    b) Shopping lists
+    c) Weight/fitness trackers
+    d) Travel plans
+    e) Project summaries
+    f) To-do lists
+    g) Workout routines
+    h) Diet plans
+    i) Meeting notes
+    j) Personal goals
+    k) Contact lists
 
 Examples of Valid Notes:
 What is Cloud Computing?

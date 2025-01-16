@@ -13,7 +13,8 @@ export default function Inputs({
   return (
     <div className="flex flex-row justify-center w-full mb-4">
       <div className="w-1/2">
-        {subHead}{isRequired && <span className="text-red-500 text-sm">*</span>}
+        {subHead}
+        {isRequired && <span className="text-red-500 text-sm">*</span>}
       </div>
       {options ? (
         <Option

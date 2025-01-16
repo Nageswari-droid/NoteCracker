@@ -3,8 +3,7 @@ import useSession from "../hooks/useSession";
 import Loader from "../Loader";
 import Pages from "./Pages";
 import defaultDict from "../utils/defaultDict";
-import Revise from "./Revise";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../context/contextProvider";
 import { homepage } from "../constants/text";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
   const session = useSession();
   const navigate = useNavigate();
-  const { setPages, setAllPages, setWorkspace, allPages, mcq, setMcq } = useContext(Context);
+  const { setPages, setAllPages, setWorkspace, allPages, setMcq } = useContext(Context);
   const { data: sessionData, isLoading: sessionLoading } = session;
   const { listPages, error } = useListPages(
     sessionData?.accessToken,
