@@ -4,9 +4,10 @@ Note Cracker
 
 <div align="center">
 <p align="center">
-<img width="600" alt="login" src="https://github.com/user-attachments/assets/d7dd592d-0ae3-47f0-8cc1-860eec793c55" style="text-align:center;" />
+<video width="400" alt="login" src="https://github.com/user-attachments/assets/0604f9fc-96fc-464d-8396-88fbfe9408dd" style="text-align:center;" />
 </p>
 </div>
+
 
 ## Overview
 
