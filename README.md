@@ -55,7 +55,6 @@ Note Cracker is a `React JS` based application that leverages OpenAI and Supabas
 VITE_SUPABASE_URL = <supabase_url>
 VITE_SUPABASE_KEY = <supabase_anon_key>
 VITE_OPENAI_API_KEY = <openai_api_key>
-VITE_SUPABASE_BASE_URL = http://127.0.0.1:54321/functions/v1 (or) <supabase_url>/functions/v1
 ```
 - To start the application, `npm run dev`
 
