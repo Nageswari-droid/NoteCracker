@@ -35,15 +35,38 @@ Note Cracker is a `React JS` based application that leverages OpenAI and Supabas
 ## Deploying Supabase Edge Function
 
 - You can run the functions locally using Docker or deploy them directly to your Supabase account.
-- Steps for Deployment:
+
+### Steps for Local Environment Setup
+   - Get Docker from [here](https://docs.docker.com/get-started/get-docker/).
+   - Follow the instructions to install the CLI from [this guide](https://supabase.com/docs/guides/local-development/cli/getting-started#updating-the-supabase-cli).
+   - Verify that the Docker engine is running on your local machine.
+   - Run the following commands to start the Supabase server and serve the functions:
+     ```
+     supabase start
+     supabase functions serve
+     ```
+   - Make changes in the front-end to ensure API calls hit the local Edge Functions.  
+   - Specifically, update the following files:
+     - `/src/hooks/useListPages.js`
+     - `/src/hooks/usePageContent.js`
+   - In both files, update the following line:  
+     ```
+     const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || supabaseUrl;
+     ```
+   - Change it to:  
+     ```
+     const SUPABASE_URL = "http://127.0.0.1:54321";
+     ```
+   - Once the changes are made, the API calls from the front-end will target the local Edge Functions.
+     
+### Steps for Deployment Setup
   - Navigate to the supabase directory from the root directory of the project.
   - Use the following commands to deploy the functions
-
     ```
     supabase login
     supabase functions deploy
     ```
-- Ensure the Supabase container is running in Docker to execute the deployment successfully.
+  - If you're deploying to a Supabase project, there's no need to modify the code.
 
 ## Local setup
 
@@ -56,7 +79,6 @@ VITE_SUPABASE_URL = <supabase_url>
 VITE_SUPABASE_KEY = <supabase_anon_key>
 VITE_OPENAI_API_KEY = <openai_api_key>
 ```
+- If the .env file is not created, the application will prompt input fields upon startup to enter all the necessary keys and URLs.
+- This feature can be used if you prefer not to create environment variables manually.
 - To start the application, `npm run dev`
-
-
-
