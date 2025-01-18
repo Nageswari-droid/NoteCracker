@@ -31,6 +31,11 @@ Note Cracker is a `React JS` based application that leverages OpenAI and Supabas
   - In your Supabase project, navigate to the Authentication section from the menu.
   - Under the Providers tab, enable Notion as a provider.
   - Enter the OAuth Client ID and OAuth Client Secret from your Notion integration to complete the setup.
+  - Enable Notion OAuth after entering all necessary credentials.  
+  - Go to **Authentication** -> **Configuration** -> **URL Configuration**.  
+  - Enter your **Site URL** and **Redirect URLs** to define where your website should redirect after authenticating with Notion.  
+  - Under **Redirect URLs**, you can specify multiple URLs to account for local and production environments.  
+  - Refer to [this guide](https://supabase.com/docs/guides/auth/redirect-urls) for further clarification.  
 
 ## Deploying Supabase Edge Function
 
@@ -57,7 +62,7 @@ Note Cracker is a `React JS` based application that leverages OpenAI and Supabas
      ```
      const SUPABASE_URL = "http://127.0.0.1:54321";
      ```
-   - Once the changes are made, the API calls from the front-end will target the local Edge Functions.
+   - Once the changes are made, the API calls from the front end will target the local Edge Functions.
      
 ### Steps for Deployment Setup
   - Navigate to the supabase directory from the root directory of the project.
@@ -66,7 +71,7 @@ Note Cracker is a `React JS` based application that leverages OpenAI and Supabas
     supabase login
     supabase functions deploy
     ```
-  - If you're deploying to a Supabase project, there's no need to modify the code.
+  - There's no need to modify the code if you're deploying to a Supabase project.
 
 ## Local setup
 
@@ -94,7 +99,7 @@ VITE_OPENAI_API_KEY = <openai_api_key>
     <img width="400" alt="login" src="https://github.com/user-attachments/assets/800b818a-9fc7-4ec6-b445-87c5ec51321c" />
   </p>
 
-- Click "Login" to login with Notion and select the workspace you want to grant access to.
+- Click "Login to Notion" and select the workspace you want to grant access to.
   <p align="center">
     <img width="400" alt="login" src="https://github.com/user-attachments/assets/b7b9ebd2-7fff-4640-89df-f2d7777b7033" />
   </p>
