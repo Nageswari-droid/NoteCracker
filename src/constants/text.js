@@ -20,6 +20,10 @@ const pageContentNotFound = "Page Content Not Found!";
 const pageContentNotFoundMessage =
   "If the current page contains only subpages, you can choose them from the pages dropdown menu within the selected workspace.";
 const apiError = "Could not fetch data. Please try again later.";
+const configurations = "Enter Configuration";
+const supabaseURL = "Supabase URL";
+const supabaseKeyLabel = "Supabase API Key";
+const openAiKeyLabel = "OpenAI API Key";
 
 export {
   notionLogin,
@@ -43,4 +47,8 @@ export {
   pageContentNotFound,
   pageContentNotFoundMessage,
   apiError,
+  configurations,
+  supabaseURL,
+  supabaseKeyLabel,
+  openAiKeyLabel,
 };

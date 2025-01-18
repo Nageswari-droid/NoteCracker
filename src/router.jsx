@@ -5,6 +5,9 @@ import ProtectedRoute from "./ProtectedRoute";
 import Logout from "./components/LogoutBar";
 import ErrorPage from "./components/Error";
 import Revise from "./components/Revise";
+import { useState } from "react";
+import { checkEnv } from "./utils/checkEnv";
+import ConfigPage from "./components/ConfigPage";
 
 const Layout = (props) => {
   return (
@@ -17,11 +20,25 @@ const Layout = (props) => {
   );
 };
 
+const LoginConfig = () => {
+  const [hasConfigurations, setHasConfigurations] = useState(false);
+
+  return (
+    <>
+      {!checkEnv() && !hasConfigurations ? (
+        <ConfigPage setHasConfigurations={setHasConfigurations} />
+      ) : (
+        <Login />
+      )}
+    </>
+  );
+};
+
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginConfig />} />
         <Route
           path="/pages"
           element={

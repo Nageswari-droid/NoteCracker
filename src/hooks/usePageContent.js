@@ -14,9 +14,13 @@ export default function usePageContent(
   enable
 ) {
   const [error, setError] = useState(null);
+  const supabaseUrl = localStorage.getItem("supabaseUrl");
+  const openAiKey = localStorage.getItem("openAiKey");
+
+  const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || supabaseUrl;
 
   const fetchLLMData = async (prompt) => {
-    const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+    const API_KEY = import.meta.env.VITE_OPENAI_API_KEY || openAiKey;
 
     if (!prompt || !accessToken || !API_KEY) {
       return null;
@@ -24,7 +28,7 @@ export default function usePageContent(
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_BASE_URL}/llm_openai`,
+        `${SUPABASE_URL}/functions/v1/llm_openai`,
         {
           method: "POST",
           headers: {
@@ -84,7 +88,7 @@ export default function usePageContent(
 
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_SUPABASE_BASE_URL}/page_content`,
+          `${SUPABASE_URL}/functions/v1/page_content`,
           {
             method: "POST",
             headers: {

@@ -3,6 +3,9 @@ import { useState } from "react";
 
 export default function useListPages(accessToken, providerToken) {
     const [error, setError] = useState(null);
+    const supabaseUrl = localStorage.getItem("supabaseUrl");
+
+    const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || supabaseUrl;
 
     const listPages = useQuery({
         queryKey: ["listPages"],
@@ -20,7 +23,7 @@ export default function useListPages(accessToken, providerToken) {
 
             try {
                 const response = await fetch(
-                    `${import.meta.env.VITE_SUPABASE_BASE_URL}/notion_pages`, {
+                    `${SUPABASE_URL}/functions/v1/notion_pages`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
