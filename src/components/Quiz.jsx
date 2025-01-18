@@ -35,7 +35,7 @@ export default function Quiz({
 
   return (
     <div className="question">
-      <h2 className="text-xl font-semibold mb-4">{currentQuestion.question}</h2>
+      <h2 className="text-xl max-[550px]:text-lg max-[450px]:text-base font-semibold mb-4">{currentQuestion.question}</h2>
       <div className="options grid grid-cols-1 gap-4">
         {currentQuestion.options.map((option, index) => (
           <div

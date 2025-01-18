@@ -26,7 +26,7 @@ export default function Login() {
 
   return (
     <div className="bg-[#1a1a19] w-full h-full flex">
-      <div className="m-auto">
+      <div className="m-auto max-[550px]:w-3/4 max-[450px]:w-11/12">
         <CardWithButton
           img={notes}
           body={cardBody}

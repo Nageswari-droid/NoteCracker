@@ -94,7 +94,7 @@ VITE_OPENAI_API_KEY = <openai_api_key>
     <img width="400" alt="login" src="https://github.com/user-attachments/assets/800b818a-9fc7-4ec6-b445-87c5ec51321c" />
   </p>
 
-- Click "Login with Notion" and select the workspace you want to grant access to.
+- Click "Login" to login with Notion and select the workspace you want to grant access to.
   <p align="center">
     <img width="400" alt="login" src="https://github.com/user-attachments/assets/b7b9ebd2-7fff-4640-89df-f2d7777b7033" />
   </p>

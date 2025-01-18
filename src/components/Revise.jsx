@@ -20,7 +20,7 @@ export default function Revise() {
     <>
       {mcq && (
         <div className="bg-[#1a1a19] w-full h-full flex">
-          <div className="xl:w-1/2 lg:w-2/3 w-3/4 border-0 m-auto rounded-md bg-slate-100 p-6">
+          <div className="xl:w-1/2 lg:w-2/3 w-3/4 max-[550px]:text-sm max-[450px]:text-xs border-0 m-auto rounded-md bg-slate-100 p-6">
             {showResults ? (
               <Result
                 mcq={mcq}

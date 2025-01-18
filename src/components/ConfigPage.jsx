@@ -34,8 +34,8 @@ export default function ConfigPage({ setHasConfigurations }) {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-[#1a1a19]">
-      <div className="bg-white p-6 rounded shadow-md w-1/3">
+    <div className="flex items-center justify-center h-screen w-full bg-[#1a1a19]">
+      <div className="bg-white p-6 rounded shadow-md xl:w-1/3 lg:w-1/2 md:w-2/3 sm:w-10/12 w-11/12">
         <div className="text-xl font-bold mb-4">{configurations}</div>
         <div>
           <TextBox

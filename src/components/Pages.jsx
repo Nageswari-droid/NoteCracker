@@ -159,7 +159,7 @@ export default function Pages({ setMcq }) {
 
   return (
     <div className="bg-[#1a1a19] w-full h-full flex">
-      <div className="xl:w-1/2 lg:w-2/3 w-3/4 border-0 m-auto rounded-md bg-slate-100 p-6">
+      <div className="xl:w-1/2 lg:w-2/3 md:w-3/4 sm:w-10/12 w-11/12 border-0 m-auto rounded-md bg-slate-100 p-6">
         <Inputs
           subHead={workspacesTitle}
           options={workspace}
@@ -192,16 +192,16 @@ export default function Pages({ setMcq }) {
           count={selectedNumberOfQuestions}
           isRequired={false}
         />
-        <div className="w-1/5 m-auto font-semibold">
+        <div className="xl:w-1/5 lg:w-1/5 md:w-1/4 sm:w-1/3 max-[650px]:w-1/3 max-[550px]:w-1/2 max-[450px]:w-3/5 m-auto font-semibold">
           <ButtonWithImage
             icon={revision}
             activeIcon={revisionActive}
             label={submit}
             onClickHandler={handleClick}
             isDisabled={
-              selectedWorkspace === "" ||
-              selectedPage === "" ||
-              selectedQuestionDifficulty === ""
+              !selectedWorkspace ||
+              !selectedPage ||
+              !selectedQuestionDifficulty
             }
           />
         </div>
