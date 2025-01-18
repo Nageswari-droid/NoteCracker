@@ -126,7 +126,7 @@ VITE_OPENAI_API_KEY = <openai_api_key>
 - If the selected Notion page contains only subpages and no actual content, you must select the subpages individually for revision.
 - Attempting to select a page without any content will result in an error message instructing you to choose a page with content.
   <p align="center">
-    <img width="400" alt="login" src="https://github.com/user-attachments/assets/10794091-d7f6-4015-837d-2b11371f09c3" />
+    <img width="400" alt="login" src="https://github.com/user-attachments/assets/da8735f8-ac37-44c6-a391-096a381ae6f2" />
   </p>
 
 - If the selected note is unsuitable for generating MCQs (e.g., travel plans, personal information, timetables, shopping lists, etc.), an error message will prompt you to upload a valid note for revision.
@@ -139,5 +139,4 @@ VITE_OPENAI_API_KEY = <openai_api_key>
   </p>
 
 - A "Logout" button is available on every page to end your session securely.  
-
 
