@@ -82,3 +82,57 @@ VITE_OPENAI_API_KEY = <openai_api_key>
 - If the .env file is not created, the application will prompt input fields upon startup to enter all the necessary keys and URLs.
 - This feature can be used if you prefer not to create environment variables manually.
 - To start the application, `npm run dev`
+
+## Application Walkthrough
+
+- When the application starts, you can either use the configuration page (if the `.env` file is not available) or proceed directly to the login screen.
+  <p align="center">
+    <img width="400" alt="login" src="https://github.com/user-attachments/assets/2df5b627-f5b7-4590-ad2b-606d5737c836" />
+  </p>
+  
+  <p align="center">
+    <img width="400" alt="login" src="https://github.com/user-attachments/assets/800b818a-9fc7-4ec6-b445-87c5ec51321c" />
+  </p>
+
+- Click "Login with Notion" and select the workspace you want to grant access to.
+  <p align="center">
+    <img width="400" alt="login" src="https://github.com/user-attachments/assets/b7b9ebd2-7fff-4640-89df-f2d7777b7033" />
+  </p>
+
+- After logging in, you'll be redirected to a page where you can configure the workspace, pages, difficulty level, and the number of questions (minimum: 10, maximum: 20).
+  <p align="center">
+    <img width="400" alt="login" src="https://github.com/user-attachments/assets/bc2a89c5-4397-452a-9245-63ad5802c4ef" />
+  </p>
+  
+- Click the "Submit" button to navigate to the MCQ revision page.  
+- The selected number of questions will appear, each with four answer options.  
+- Choose an answer and proceed to the next question.  
+- Use the "Previous" button if you need to change any answers.
+  <p align="center">
+    <img width="400" alt="login" src="https://github.com/user-attachments/assets/de2f1c9a-a73e-42b3-898c-feb559461a46" />
+  </p>
+
+- Once all questions are answered, you'll see a result page displaying your score, correct answers, and explanations.  
+- To revise again, click the "Revise More" button.
+  <p align="center">
+    <img width="400" alt="login" src="https://github.com/user-attachments/assets/bc581ccc-9d7c-459f-8ff2-48b828427fd5" />
+  </p>
+
+- If the selected Notion page contains only subpages and no actual content, you must select the subpages individually for revision.
+- Attempting to select a page without any content will result in an error message instructing you to choose a page with content.
+  <p align="center">
+    <img width="400" alt="login" src="https://github.com/user-attachments/assets/10794091-d7f6-4015-837d-2b11371f09c3" />
+  </p>
+
+- If the selected note is unsuitable for generating MCQs (e.g., travel plans, personal information, timetables, shopping lists, etc.), an error message will prompt you to upload a valid note for revision.
+  <p align="center">
+    <img width="400" alt="login" src="https://github.com/user-attachments/assets/a73e58fd-4f15-4dbc-bbbf-07dc473a3fd6" />
+  </p>
+
+   <p align="center">
+    <img width="400" alt="login" src="https://github.com/user-attachments/assets/ea6ac046-1180-4926-a3f7-912fe8e8b759" />
+  </p>
+
+- A "Logout" button is available on every page to end your session securely.  
+
+
