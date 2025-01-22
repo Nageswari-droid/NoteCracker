@@ -59,7 +59,7 @@ export default function Home() {
         let page = {};
         let id = result.id;
 
-        if (result.properties.title) {
+        if (result.properties.title && result.properties.title.title[0]) {
           let title = result.properties.title.title[0].plain_text;
           if (result.parent.workspace || result.parent.block_id) {
             workspace[id] = title;
