@@ -7,9 +7,6 @@ export default function useLoginWithNotion() {
     mutationFn: async () => {
       const { data, error } = await supabase().auth.signInWithOAuth({
         provider: "notion",
-        options: {
-          redirectTo: "http://localhost:5173",
-        }
       });
 
       if (error) {
