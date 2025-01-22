@@ -11,7 +11,8 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
   const session = useSession();
   const navigate = useNavigate();
-  const { setPages, setAllPages, setWorkspace, allPages, setMcq } = useContext(Context);
+  const { setPages, setAllPages, setWorkspace, allPages, setMcq } =
+    useContext(Context);
   const { data: sessionData, isLoading: sessionLoading } = session;
   const { listPages, error } = useListPages(
     sessionData?.accessToken,
@@ -57,19 +58,21 @@ export default function Home() {
       results.forEach((result) => {
         let page = {};
         let id = result.id;
-        let title = result.properties.title.title[0].plain_text;
 
-        if (result.parent.workspace || result.parent.block_id) {
-          workspace[id] = title;
-          page[id] = homepage;
-          pages[id].push(page);
-        } else {
-          let parent_id = result.parent.page_id;
-          page[id] = title;
-          pages[parent_id].push(page);
+        if (result.properties.title) {
+          let title = result.properties.title.title[0].plain_text;
+          if (result.parent.workspace || result.parent.block_id) {
+            workspace[id] = title;
+            page[id] = homepage;
+            pages[id].push(page);
+          } else {
+            let parent_id = result.parent.page_id;
+            page[id] = title;
+            pages[parent_id].push(page);
+          }
+
+          allPages[id] = title;
         }
-
-        allPages[id] = title;
       });
 
       setAllPages(allPages);
