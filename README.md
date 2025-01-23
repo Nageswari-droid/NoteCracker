@@ -8,20 +8,31 @@ Note Cracker
 </p>
 </div>
 
+## Problem
 
-## Overview
+We take in a great deal of knowledge every day, yet we forget a significant portion just as fast. What is the value of knowledge if we cannot recall or use it when it matters most? Forgetting is not a flaw; it is simply how our brain functions, as explained by Ebbinghaus’s forgetting curve. This curve illustrates the exponential rate at which information fades from memory unless an active effort is made to retain it.
 
-Note Cracker is a `React JS` based application that leverages OpenAI and Supabase to support active recall of Notion notes through multiple-choice questions (MCQs). It uses OpenAI's GPT-4o-mini model to generate MCQs tailored to the selected Notion notes, offering users the flexibility to choose the number and difficulty level of questions. Supabase manages user authentication with Notion, allowing users to provide access to specific workspaces for revision. The application utilizes Edge Functions to seamlessly handle interactions with Notion and OpenAI APIs.
+<p align="center">
+    <img width="400" alt="curve" src="https://github.com/user-attachments/assets/19b0fdf4-0af1-46cf-a0cf-3958cec2ce01" />
+</p>
 
-> The project is built with JavaScript for the front-end development and TypeScript (Deno) for the back end.
+So, how can you hold onto what you have learned? The key is testing yourself on the information, as this helps solidify it in your memory. But let’s face it, you cannot rely on random internet quizzes for everything you want to remember. While taking notes is helpful, it is not a complete solution. Creating flashcards manually is tedious and time-consuming.
 
-## Stack
+That is where Note Cracker comes in. It is a simple tool designed to help you better retain and test the knowledge you consume.
+
+## Solution
+
+Note Cracker is a React JS application that leverages OpenAI and Supabase to support active recall of Notion notes through multiple-choice questions (MCQs). It uses OpenAI's GPT-4o-mini model to generate MCQs tailored to the selected Notion notes, allowing users to choose the number and difficulty level of questions. Supabase manages user authentication with Notion, allowing users to provide access to specific workspaces for revision. The application utilizes Edge Functions to handle interactions with Notion and OpenAI APIs seamlessly.
+
+> The project uses JavaScript for the front-end development and TypeScript (Deno) for the back-end.
+
+## Tech Stack
 
 - **React JS**: Front-end framework for building a responsive user interface.
 - **Supabase Authentication**: Manages user authentication with Notion to access Notion pages.
 - **Supabase Edge Functions**: Backend logic to interact with the Notion and OpenAI APIs.
 
-## Setting up Supabase and Notion Integration
+## Project setup: Supabase and Notion Integration
 
 - Create a Supabase Project
 - Enable Notion Login:
