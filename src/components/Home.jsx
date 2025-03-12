@@ -51,6 +51,7 @@ export default function Home() {
 
   useEffect(() => {
     if (results) {
+      console.log(results);
       let pages = new defaultDict(() => []);
       let workspace = {};
       let allPages = {};
@@ -59,9 +60,16 @@ export default function Home() {
         let page = {};
         let id = result.id;
 
-        if (result.properties.title && result.properties.title.title[0]) {
-          let title = result.properties.title.title[0].plain_text;
-          if (result.parent.workspace || result.parent.block_id) {
+        let title =
+          result.properties.title?.title[0]?.plain_text ||
+          result.properties.Name?.title[0]?.plain_text || "";
+
+        if (title) {
+          if (
+            result.parent.workspace ||
+            result.parent.block_id ||
+            result.parent.database_id
+          ) {
             workspace[id] = title;
             page[id] = homepage;
             pages[id].push(page);
@@ -70,9 +78,9 @@ export default function Home() {
             page[id] = title;
             pages[parent_id].push(page);
           }
-
-          allPages[id] = title;
         }
+
+        allPages[id] = title;
       });
 
       setAllPages(allPages);

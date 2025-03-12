@@ -39,6 +39,7 @@
         "npm:eslint-plugin-react@^7.37.2",
         "npm:eslint@^9.17.0",
         "npm:globals@^15.14.0",
+        "npm:openai@^4.78.1",
         "npm:postcss@^8.4.49",
         "npm:prop-types@^15.8.1",
         "npm:react-dom@^18.3.1",
